@@ -23,8 +23,8 @@
 ```ruby
 class ItemSerializer < BaseSerializer
   attributes :id, :title, :price, :image_path, :description
-  has_one :category, serializer: V1::CategorySerializer
-  has_many :images, each_serializer: V1::ImageEachSerializer
+  has_one :category, serializer: CategorySerializer
+  has_many :images, each_serializer: ImageEachSerializer
   def image_path
     object.image_path 
   end
