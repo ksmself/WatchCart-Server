@@ -18,18 +18,10 @@
 
 ## PankoSerializer
 
-action 에서 `render json: @object` 시 모델의 모든 내용이 response
-
-`render json: @object.as_json(only: [:id, :name, ... ], includes: [:comments], methods: [:image_path])` (or to_json) 등으로 serializatio하여 응답할 수 있지만 가독성 및 재활용이 어려움
-
-따라서 serializing 을 돕는 gem을 사용. 몇가지 gem이 있는데 대표적으로 `active_model_serializers` 
-
-직접 사용, 비교 해봤을 때 불편한 것이 많아서 `panko_serializer` 로 결정
-
 `app/serializers/...` 에 serializer 위치 기본 예시
 
 ```ruby
-class V1::ItemSerializer < V1::BaseSerializer
+class ItemSerializer < BaseSerializer
   attributes :id, :title, :price, :image_path, :description
   has_one :category, serializer: V1::CategorySerializer
   has_many :images, each_serializer: V1::ImageEachSerializer
@@ -52,14 +44,15 @@ end
 
 ```ruby
 def serialize object, serializer_name = "#{object.class.name}Serializer"
-  self.class.module_parent.const_get("#{serializer_name}").new.serialize(object)
+  serializer_name.constantize.new(context: context).serialize(object)
 end
 
 def each_serialize objects, serializer_name: "#{objects.name}EachSerializer"
-  Panko::ArraySerializer.new(
-    objects, 
-    each_serializer: self.class.module_parent.const_get(serializer_name)
-  ).to_a
+    Panko::ArraySerializer.new(
+      objects, 
+      context: context,
+      each_serializer: serializer_name.constantize
+    ).to_a
 end
 ```
 
