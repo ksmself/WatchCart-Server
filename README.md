@@ -1,17 +1,20 @@
 # README
 
+## Requirements
+
+* redis : jwt refresh token ruid 저장 용도 brew 로 설치
+* postgresql - app 보단 brew로 설치 추천
+* imagemagick - brew
+
 ## Generator
 
 새로운 Controller 만들 때
 
-`rails g api v1/items`
+`rails g api items`
 
 새로은 Serializer 만들 때
 
-`rails g serializer v1/item`
-
-
-### 
+`rails g serializer item`
 
 ## PankoSerializer
 

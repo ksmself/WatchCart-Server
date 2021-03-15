@@ -56,17 +56,14 @@ class ApiController < ActionController::API
   end
   
   def serialize object, serializer_name: "#{object.class.name}Serializer", context: nil
-    self.class.module_parent.const_get("#{serializer_name}").new(context: context).serialize(object)
+    serializer_name.constantize.new(context: context).serialize(object)
   end
 
   def each_serialize objects, serializer_name: "#{objects.name}EachSerializer", context: nil
     Panko::ArraySerializer.new(
       objects, 
       context: context,
-      each_serializer: self.class.module_parent.const_get(serializer_name)
+      each_serializer: serializer_name.constantize
     ).to_a
   end
-
-
-
 end

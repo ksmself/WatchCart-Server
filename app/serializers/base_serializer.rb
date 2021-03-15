@@ -1,4 +1,4 @@
-class V1::BaseSerializer < Panko::Serializer
+class BaseSerializer < Panko::Serializer
   attributes :model_name
 
   def model_name
