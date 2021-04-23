@@ -9,7 +9,7 @@ class ApiGenerator < Rails::Generators::NamedBase
   private
 
   def api_name
-    name.pluralize.split('/').map(&:capitalize).join('::')
+    name.pluralize.split('/').map(&:capitalize).join('::').remove('_')
   end
 
   def version
