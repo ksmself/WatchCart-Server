@@ -1,5 +1,8 @@
 class User < ApplicationRecord
+  paginates_per 8
+  include ImageUrl
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
-  mount_uploader :image, ImageUploader
+  has_many :items, dependent: :nullify
+  enum gender: { unknown: 0, male: 1, female: 2 }
 end

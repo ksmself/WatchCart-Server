@@ -40,7 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :zipcode
       t.integer :gender, limit: 2, default: 0
       t.date :birthday
-      t.integer :status, limit: 2,default: 0
+      t.integer :status, limit: 2, default: 0
       t.string :customs_number
       t.boolean :accept_sms
       t.boolean :accept_email

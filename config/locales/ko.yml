@@ -1,0 +1,416 @@
+ko:
+  attributes:
+    id: ID
+    user: 사용자
+    name: 이름
+    gender: 성별
+    date: 날짜
+    memo: 메모
+    user_type: 회원유형
+    user_limit: 최대인원
+    accept_email: "이메일 수신동의"
+    accept_sms: "SMS 수신동의"
+    email: 이메일
+    phone: 전화번호
+    group_time: 모임날짜
+    password: 비밀번호
+    password_confirmation: 비밀번호 확인
+    address1: 기본주소
+    address2: 상세주소
+    zipcode: 우편번호
+    agree_tos:
+    agree_privacy: 개인정보취급방침에 동의합니다
+    zipcode: 우편번호
+    summary: 요약 설명
+    description: 소개글
+    note: 메모
+    bank_account: 계좌번호
+    title: 제목
+    body: 내용
+    item: 상품
+    quantity: 수량
+    total: 총 금액
+    state: 상태
+    order_number: 주문 번호
+    paid_at: 결제 시간
+    cancelled_at: 결제 취소 시간
+    payment_method: 결제 방법
+    expires_at: "만료 시간"
+    image: "이미지"
+    position: "순서"
+    birthday: "생년월일"
+    created_at: "생성시간"
+    updated_at: "수정시간"
+    deleted_at: "삭제시간"
+    reserve_at: "예약 시간"
+    reserved_at: "예약 시간"
+    price: "가격"
+    amount: "상품수량"
+    conversation_type: "코칭종류"
+    start_at: "시작시간"
+    end_at: "종료시간"
+    status: "상태"
+    status_str: "상태"
+    review: "리뷰"
+    level: 등급
+    coupon_rule: "쿠폰규칙"
+    number: "번호"
+    used: "사용됨"
+    url: "URL"
+    current_sign_in_at: "최근 로그인"
+    sign_in_count: "로그인 횟수"
+    object_type: "타입"
+    is_private: "비공개"
+    publish_date: "공개일"
+    view_count: 조회수
+    title: 제목
+    content: 내용
+    remark: 비고
+    holder: 예금주
+    post: 게시물
+    pay: 급여
+    open: 영업시간
+    follower: "팔로워"
+    following: "팔로잉"
+    user_list: "회원목록"
+    reviews: "리뷰"
+    comments: "댓글"
+    receiver_phone: 수신자 번호
+    sender_phone: 발신자 번호
+    tag_list: 해시태그
+    video: 비디오
+    star: 평점
+
+  activerecord:
+    attributes:
+      user:
+        account_type: 계정타입
+        point: 적립금
+        name: 사용자명
+        email: 이메일
+        phone: 전화번호
+        address1: 주소
+        address2: 상세주소
+        zipcode: 우편번호
+        gender: 성별
+        customs_number: 통관부호
+        sign_in_count: 로그인 수
+        accept_sms: SMS 수신
+        accept_email: 이메일 수신
+        user_type: 사용자 유형
+        lat: 위도
+        lng: 경도
+        en_address: 영문 주소
+        point: 포인트(적립금)
+        reviews_average: 리뷰평점 평균
+        reviews_count: 리뷰개수
+        uid: UID
+        provider: 플랫폼
+        device_type: 기기종류
+      contact:
+        user: 사용자
+        title: 제목
+        phone: 전화번호
+        email: 이메일
+        contact_type: 문의유형
+        answer: 답변
+      item:
+        title: 상품명
+        sale_rate: 할인율
+        category: 카테고리
+        real_price: 실제판매가격
+        name: 상품명
+        origin: 원산지
+        reviews_average: 평점평균
+        reviews_count: 리뷰개수
+        price: 상품가격
+        user: 상품등록자
+        status: 상품상태
+      place:
+        title: 장소명
+        phone: 전화번호
+        zipcode: 우편번호
+        address1: 주소
+        address2: 상세주소
+        description: 장소설명
+        open: 오픈
+        price: 가격
+        lat: 위도
+        lng: 경도
+        reviews_count: 리뷰개수
+        reviews_average: 리뷰평점
+        user: 사용자
+        price_info: "가격정보 (ex: 50000원대)"
+        price: "가격 (가격대 필터 위함)"
+      option:
+        name: 옵션명
+        list_price: 정가
+        sale_price: 판매가
+        stock: 재고
+      category:
+        title: 카테고리명
+      order:
+        name: 주문자명
+        phone: 사용자전화번호
+        quantity: 주문상품 수량
+        deposit_user_name: 무통장입금자명
+        point: 적립금사용
+        total: 총결제금액
+        total_without_shipping: 배송비제외 결제금액
+        user: 사용자
+        item_total: 상품 총금액
+        shipment_total: 배송비 총금액
+        shipment_state: 배송상태
+        status: 주문상태
+        zipcode: 우편번호
+        address1: 주소
+        address2: 상세주소
+        payment_method: 결제방식
+        uid: UID
+        shipment_number: 배송수량
+        order_number: 주문번호
+      line_item:
+        option: 옵션
+        unit_price: 상품가격
+      refund:
+        order: 주문
+        total: 환불 총액
+        point: 환불 포인트
+      comment:
+        user: 작성자
+        body: 내용
+      notice:
+        position: 순서
+        title: 공지사항 제목
+      faq:
+        title: 질문
+        content: 대답
+      banner:
+        title: 배너타이틀
+        content: 배너내용
+        path: 배너경로
+        image: 배너 이미지
+      delivery:
+        order: 주문
+        brand: 브랜드
+        state: 배송 상태
+        shipping_fee: 배송비
+        shipping_number: 운송장 번호
+        delivery_number: 배송번호
+        total: 배송상품 총금액
+      brand:
+        name: 브랜드명
+        image: 브랜드이미지
+        shipping_fee: 배송비용
+        free_standard: 무료배송기준
+        exchange_fee: 교환비용
+        return_fee: 반송비용
+        delivery_brand: 배송사
+        jeju_fee: 제주지역 배송비
+        land_fee: 산간지역 배송비
+        shipping_fee_type: 배송비타입
+      bank:
+        name: 은행명
+        holder: 예금주
+        number: 계좌번호
+      magazine:
+        subtitle: 부제목
+        start_date: 시작날짜
+        end_date: 종료날짜
+        category: 카테고리
+      card:
+        user: 사용자
+        customer_uid: 소비자 UID
+        name: 카드명
+        pg_tid: PG_TID
+        imp_uid: IMP_UID
+        card_number: 카드번호
+      post:
+        title: 제목
+        content: 내용
+        user: 게시자
+        pay: 시급
+        status: 상태
+        lat: 위도
+        lng: 경도
+        zipcode: 우편번호
+        address1: 주소
+        address2: 상세주소
+      report:
+        user: 신고자
+        _type: 신고유형
+        status: 상태
+        target: 신고대상
+        body: 내용
+      book:
+        start_at: 시작일
+        end_at: 종료일
+        book_request: 요청사항
+
+    models:
+      dashboard: 대시보드
+      user: "사용자"
+      admin_user: 어드민
+      category: 카테고리
+      item: 상품
+      like: 찜
+      line_item: 주문상품
+      option: 옵션
+      order: 주문
+      refund: 환불
+      delivery: 배송
+      post: 게시물
+      post_comment: 댓글
+      post_image: 게시글 이미지
+      qna: Q&A
+      notice: 공지사항
+      faq: FAQ
+      banner: 배너
+      brand: 브랜드
+      popup: 팝업
+      bank: 은행(무통장)
+      magazine: 매거진
+      item_category: 상품카테고리
+      magazine_category: 매거진카테고리
+      order_calculation: 주문별 정산
+      brand_calculation: 브랜드별 정산
+      refund_line_item: 환불상품
+      place: 장소
+      report: 신고
+      user_post: 지원내역
+      user_group: 가입신청
+      review: 리뷰
+      follow: 팔로우
+      comment: 댓글
+      room: 채팅방
+      card: 카드
+      contact: 문의
+      group: 그룹
+      member: 멤버
+      event: 이벤트
+      sheet: 설문
+      notification: 알림내역
+      page: 이용약관
+      content: 게시물
+      book: 예약
+      video: 비디오
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "항목이 비어있습니다"
+            gender: "성별"
+            birthday: "생일"
+            allow_email: "이메일 수신동의"
+            allow_sms: "SMS 수신동의"
+            birthday:
+              blank: "항목이 비어있습니다"
+            phone: "휴대폰번호"
+            phone:
+              blank: "항목이 비어있습니다"
+            password: "비밀번호"
+            password:
+              blank: "항목이 비어있습니다"
+            username: "닉네임"
+            username:
+              blank: "항목이 비어있습니다"
+            email:
+              blank: "항목이 비어있습니다"
+            gender:
+              blank: "항목이 비어있습니다"
+            company:
+              blank: "항목이 비어있습니다"
+            job:
+              blank: "항목이 비어있습니다"
+
+  enum:
+    item:
+      status:
+        active: 활성
+        disabled: 비활성
+        sold_out: 품절
+    order:
+      state:
+        cart: 장바구니
+        direct: 바로주문
+        ready: 입금 대기
+        paid: 결제완료
+        complete: 구매확정
+        cancel: 주문취소
+        request_cancel: 취소요청
+        partial_cancel: 부분취소
+        error: 결제오류
+        checked: 결제확인
+        before_delivery: 상품준비중
+      payment_method:
+        card: 카드
+        vbank: 가상계좌
+        deposit: 무통장 입금
+        all: 전체
+    user:
+      gender:
+        man: 남성
+        woman: 여성
+        no_select: 선택안함
+    delivery:
+      state:
+        ready: 배송준비
+        shipping: 배송중
+        complete: 배송완료
+        total: 배송상품총액
+    faq:
+      position:
+        normal: 일반
+    contact:
+      contact_type:
+        item: 상품
+        payment: 결제
+        etc: 기타
+    report:
+      _type:
+        abuse: 욕설
+        indecent: 음란물
+        advertising: 불법광고
+        others: 기타
+      status:
+        waiting: 대기중
+        completed: 처리완료
+
+  time:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%Y-%m-%d"
+      long: "%Y-%m-%d %H:%M"
+  date:
+    month_names:
+    -
+    - 1월
+    - 2월
+    - 3월
+    - 4월
+    - 5월
+    - 6월
+    - 7월
+    - 8월
+    - 9월
+    - 10월
+    - 11월
+    - 12월
+    formats:
+      default: "%Y-%m-%d"
+      short: "%Y-%m-%d"
+      long: "%Y-%m-%d"
+    order:
+      - :year
+      - :month
+      - :day
+
+  views:
+    pagination:
+      next: 다음
+      last: 마지막
+      first: 처음
+      prev: 이전
+      truncate: ...

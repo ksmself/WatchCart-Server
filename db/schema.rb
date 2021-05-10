@@ -41,6 +41,51 @@ ActiveRecord::Schema.define(version: 2020_11_30_070812) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "position"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "imagable_type"
+    t.bigint "imagable_id"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imagable_type", "imagable_id"], name: "index_images_on_imagable_type_and_imagable_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.integer "sale_price"
+    t.integer "list_price"
+    t.text "video"
+    t.bigint "category_id"
+    t.text "description"
+    t.bigint "user_id"
+    t.string "image"
+    t.integer "status", default: 0
+    t.decimal "reviews_average", default: "0.0"
+    t.integer "reviews_count"
+    t.integer "view_count", default: 0
+    t.string "zipcode"
+    t.string "address1"
+    t.string "address2"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "_type"
+    t.decimal "lat", precision: 15, scale: 10
+    t.decimal "lng", precision: 15, scale: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

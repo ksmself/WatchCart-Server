@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation
+  menu parent: "사용자"
 
   index do
     selectable_column
@@ -12,8 +12,6 @@ ActiveAdmin.register AdminUser do
   end
 
   filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
   filter :created_at
 
   form do |f|
@@ -24,5 +22,4 @@ ActiveAdmin.register AdminUser do
     end
     f.actions
   end
-
 end

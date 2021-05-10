@@ -1,5 +1,5 @@
 class ServiceGenerator < Rails::Generators::NamedBase
-  source_root File.expand_path('templates', __dir__)
+  source_root File.expand_path("templates", __dir__)
 
   def generate_controller
     template "service.rb", "app/services/#{name}_service.rb"
@@ -10,7 +10,7 @@ class ServiceGenerator < Rails::Generators::NamedBase
 
   def service_name
     if name.pluralize.singularize == name
-      "#{name.classify}"
+      name.classify.to_s
     else
       "#{name.classify}s"
     end

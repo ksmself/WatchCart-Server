@@ -1,9 +1,9 @@
 class ApiGenerator < Rails::Generators::NamedBase
-  source_root File.expand_path('templates', __dir__)
+  source_root File.expand_path("templates", __dir__)
 
   def generate_controller
-    template 'controller.rb', "app/controllers/#{name.pluralize}_controller.rb"
-    template 'test.rb', "test/controllers/#{name.pluralize}_controller_test.rb"
+    template "controller.rb", "app/controllers/#{name.pluralize}_controller.rb"
+    template "test.rb", "test/controllers/#{name.pluralize}_controller_test.rb"
   end
 
   private
@@ -13,6 +13,6 @@ class ApiGenerator < Rails::Generators::NamedBase
   end
 
   def version
-    name.include?('/') ? (name.split('/').first.upcase + '::') : ''
+    name.include?("/") ? "#{name.split('/').first.upcase}::" : ""
   end
 end
