@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_070812) do
+ActiveRecord::Schema.define(version: 2021_09_03_084013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2020_11_30_070812) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "actors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -46,6 +52,12 @@ ActiveRecord::Schema.define(version: 2020_11_30_070812) do
     t.text "body"
     t.integer "position"
     t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "directors", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -84,6 +96,29 @@ ActiveRecord::Schema.define(version: 2020_11_30_070812) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "stars"
+    t.integer "year"
+    t.string "image"
+    t.bigint "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "director_id"
+    t.index ["category_id"], name: "index_movies_on_category_id"
+    t.index ["director_id"], name: "index_movies_on_director_id"
+  end
+
+  create_table "plays", force: :cascade do |t|
+    t.bigint "movie_id"
+    t.bigint "actor_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["actor_id"], name: "index_plays_on_actor_id"
+    t.index ["movie_id"], name: "index_plays_on_movie_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -133,4 +168,8 @@ ActiveRecord::Schema.define(version: 2020_11_30_070812) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movies", "categories"
+  add_foreign_key "movies", "directors"
+  add_foreign_key "plays", "actors"
+  add_foreign_key "plays", "movies"
 end
