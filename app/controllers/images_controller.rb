@@ -5,7 +5,7 @@ class ImagesController < ApiController
   end
 
   def show
-    image = Image.find(params[:id])
+    image = Image.create(params[:image_path])
     render json: serialize(image)
   end
 

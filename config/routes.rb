@@ -24,6 +24,8 @@ Rails.application.routes.draw do
              }
 
   resources :categories
+  resources :movies
+  resources :directors
   resources :items
   resources :images do
     post :dropzone, on: :collection
