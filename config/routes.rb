@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :movies
   resources :directors
+  resources :actors
   resources :plays
   resources :items
   resources :images do
