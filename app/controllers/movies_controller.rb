@@ -3,13 +3,14 @@ class MoviesController < ApiController
 
     def index
         # movies = Movie.ransack(title_cont: params[:q]).result
-        movies = Movie.ransack(params[:q]).result
+        #movies = Movie.ransack(params[:q]).result
+        movies = Movie.includes(:played_actors).all
         render json: each_serialize(movies)
     end
 
     def create
         movie = Movie.create(movie_params)
-        render json: serialize(@movie)
+        render json: serialize(movie)
     end
 
     def show
@@ -29,7 +30,7 @@ class MoviesController < ApiController
     private
 
     def movie_params
-        params.require(:movie).permit(:category_id, :director_id, :title, :year, :stars, :image, :description)
+        params.require(:movie).permit(:category_id, :director_id, :title, :year, :stars, :image, :description, :played_actors)
     end
 
     def set_movie

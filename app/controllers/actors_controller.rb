@@ -2,7 +2,8 @@ class ActorsController < ApiController
     before_action :set_actor, only: [:show]
 
     def index 
-        actors = Actor.ransack(params[:q]).result
+        #actors = Actor.ransack(params[:q]).result
+        actors = Actor.includes(:played_movies).all
         render json: each_serialize(actors)
     end
 
@@ -18,7 +19,7 @@ class ActorsController < ApiController
     private 
 
     def actor_params
-        params.require(:actor).permit(:name)
+        params.require(:actor).permit(:name, :played_movies)
     end
 
     def set_actor 
