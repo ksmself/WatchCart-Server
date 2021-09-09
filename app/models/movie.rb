@@ -4,5 +4,6 @@ class Movie < ApplicationRecord
     belongs_to :category
     belongs_to :director
     has_many :plays
+    has_many :options
     has_many :played_actors, through: :plays, source: :actor
   end
