@@ -9,8 +9,8 @@ class MoviesController < ApiController
 
     def create
         movie = Movie.create(movie_params)
-        render json: serialize(movie)
-    end 
+        render json: serialize(@movie)
+    end
 
     def show
         render json: serialize(@movie)
@@ -39,6 +39,6 @@ class MoviesController < ApiController
     # 아무거나 query를 던질 수 없게 permitted 설정
     # 현재는 title 검색과 sorting 정도만
     def permitted_query
-        params[:q].permit(:title_cont, :category_id_eq, :s)
+        params[:q].permit(:title_cont, :category_id_eq, :id_eq, :s)
     end
 end
