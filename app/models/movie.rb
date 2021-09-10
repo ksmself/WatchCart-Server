@@ -6,4 +6,5 @@ class Movie < ApplicationRecord
     has_many :plays
     has_many :options
     has_many :played_actors, through: :plays, source: :actor
+    has_many :likes, dependent: :destroy
   end

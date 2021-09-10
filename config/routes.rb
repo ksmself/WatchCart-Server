@@ -23,6 +23,11 @@ Rails.application.routes.draw do
                registrations: "users/registrations"
              }
 
+  # as를 붙이면 get 방식이 아닌 post 방식을 바로 호출할 수 있다.
+  post '/movies/:id/like', to: 'likes#like_toggle', as: 'like'
+  get '/movies/:id/like' => 'likes#is_like'
+
+  resources :users
   resources :categories
   resources :movies
   resources :directors
