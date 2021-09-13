@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_10_020518) do
+ActiveRecord::Schema.define(version: 2021_09_13_053253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,16 @@ ActiveRecord::Schema.define(version: 2021_09_10_020518) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "option_id"
+    t.bigint "order_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["option_id"], name: "index_line_items_on_option_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -126,7 +136,20 @@ ActiveRecord::Schema.define(version: 2021_09_10_020518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.integer "price"
     t.index ["movie_id"], name: "index_options_on_movie_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "receiver_name"
+    t.string "receiver_phone"
+    t.string "address1"
+    t.integer "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "plays", force: :cascade do |t|
@@ -187,9 +210,12 @@ ActiveRecord::Schema.define(version: 2021_09_10_020518) do
 
   add_foreign_key "likes", "movies"
   add_foreign_key "likes", "users"
+  add_foreign_key "line_items", "options"
+  add_foreign_key "line_items", "orders"
   add_foreign_key "movies", "categories"
   add_foreign_key "movies", "directors"
   add_foreign_key "options", "movies"
+  add_foreign_key "orders", "users"
   add_foreign_key "plays", "actors"
   add_foreign_key "plays", "movies"
 end

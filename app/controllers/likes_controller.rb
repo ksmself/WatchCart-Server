@@ -6,8 +6,10 @@ class LikesController < ApiController
 
         if like.nil?
             Like.create(user_id: current_api_user.id, movie_id: params[:id])
+            render json: true 
         else 
             like.destroy
+            render json: false
         end
 
         # redirect_to :back

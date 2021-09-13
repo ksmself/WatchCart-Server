@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :users
   resources :categories
   resources :movies
+  resources :orders, only: [:index]
+  resources :lineitems
   resources :directors
   resources :actors
   resources :plays
