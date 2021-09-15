@@ -5,10 +5,11 @@ class LineitemsController < ApiController
     end 
 
     def create 
-        # order_id 먼저 찾아주거나 Order를 먼저 create
-        exist = Order.find_by(:status => "orderUncompleted")
+        # current user의 order 중에서 uncompleted 상태의 order가 있는지 먼저 확인
+        exist = Order.find_by(:status => "orderUncompleted", :user_id => current_api_user.id)
         if exist.nil?
-            orderId = Order.create().id
+            order = Order.create(:user_id => current_api_user.id)
+            orderId = order.id
         else 
             orderId = exist.id
         end
@@ -33,13 +34,7 @@ class LineitemsController < ApiController
         params.require(:line_item).permit(:option_id, :quantity, :order_id)
     end
 
-    def orderId
-        exist = Order.find_by(:status => "orderUncompleted", user_id: current_api_user)
-        puts exist
-        if exist.nil?
-            orderId = Order.create().id
-        else 
-            orderId = exist.id
-        end
+    def permitted_query
+        params[:q].permit(:order_id_eq)
     end
 end
