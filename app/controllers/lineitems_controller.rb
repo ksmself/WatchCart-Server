@@ -1,8 +1,8 @@
 class LineitemsController < ApiController
-    before_action :set_lineitem, only: [:update]
+    before_action :set_lineitem, only: [:show, :update, :destroy]
 
     def index
-        line_items = LineItem.all
+        line_items = LineItem.all.ransack(params[:q]).result
         render json: each_serialize(line_items)
     end 
 
@@ -43,12 +43,7 @@ class LineitemsController < ApiController
     end
 
     def show 
-        exist = Order.find_by(:status => "orderUncompleted")
-        if exist.nil?
-            render json: false
-        else 
-            render json: serialize(exist)
-        end
+        render json: serialize(@lineitem)
     end
 
     def update
@@ -56,10 +51,15 @@ class LineitemsController < ApiController
         render json: serialize(@lineitem)
     end
 
+    def destroy
+        @lineitem.destroy
+        render json: serialize(@lineitem)
+    end
+
     private 
 
     def line_item_params
-        params.require(:line_item).permit(:option_id, :quantity, :order_id)
+        params.require(:line_item).permit(:option_id, :quantity, :order_id, :status, :id)
     end
 
     def set_lineitem
@@ -67,6 +67,6 @@ class LineitemsController < ApiController
     end
 
     def permitted_query
-        params[:q].permit(:order_id_eq)
+        params[:q].permit(:order_id_eq, :status_eq)
     end
 end
