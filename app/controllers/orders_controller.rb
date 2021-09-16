@@ -1,7 +1,7 @@
 class OrdersController < ApiController
     def index 
 		# orders = current_api_user.orders
-		orders = Order.all
+		orders = Order.all.ransack(params[:q]).result
 		render json: each_serialize(orders)
 	end
 
@@ -17,6 +17,6 @@ class OrdersController < ApiController
 	end 
 
 	def permitted_query
-        params[:q].permit(:status_eq)
+        params[:q].permit(:status_eq, :user_id_eq)
     end
 end
