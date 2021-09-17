@@ -8,4 +8,6 @@ class Order < ApplicationRecord
 
   has_many :line_items, dependent: :destroy
   # order 삭제하면 line_item도 삭제
+
+  ransacker :status, formatter: proc { |status| statuses[status] }
 end

@@ -43,7 +43,26 @@ class LineitemsController < ApiController
     end
 
     def show 
-        render json: serialize(@lineitem)
+        optionId = @lineitem[:option_id]
+        optionInfo = Option.find_by(:id => optionId)
+        option_name =  optionInfo[:name]
+        option_price = optionInfo[:price]
+        movieId = optionInfo[:movie_id]
+        movieInfo = Movie.find_by(:id => movieId)
+        movie_name = movieInfo[:title]
+        image_path = movieInfo[:image]
+
+        render json: {
+            id: @lineitem.id, 
+            option_id: @lineitem.option_id,
+            quantity: @lineitem.quantity,
+            order_id: @lineitem.order_id, 
+            status: @lineitem.status, 
+            option_name: option_name,
+            option_price: option_price, 
+            movie_title: movie_name, 
+            image_path: image_path, 
+        }
     end
 
     def update
