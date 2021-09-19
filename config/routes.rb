@@ -28,7 +28,12 @@ Rails.application.routes.draw do
   get '/movies/:id/like' => 'likes#is_like'
 
   resources :users
-  resources :categories
+  # resources :categories
+  concern :paginatable do
+    get '(page/:page)', action: :index, on: :collection, as: ''
+  end
+  
+  resources :categories, concerns: :paginatable
   resources :movies
   resources :orders
   resources :lineitems
