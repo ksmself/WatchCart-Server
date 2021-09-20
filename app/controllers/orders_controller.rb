@@ -13,7 +13,8 @@ class OrdersController < ApiController
 	end 
 
 	def show
-		render json: serialize(@order)
+		order = Order.includes(:line_items).find(params[:id])
+		render json: serialize(order)
 	end
 
 	def update 
@@ -24,7 +25,7 @@ class OrdersController < ApiController
 	private 
 
 	def order_params
-		params.require(:order).permit(:user_id, :receiver_name, :receiver_phone, :address1, :total, :status)
+		params.require(:order).permit(:user_id, :receiver_name, :receiver_phone, :address1, :total, :status, :line_items)
 	end 
 
 	def set_order

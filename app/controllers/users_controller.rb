@@ -2,7 +2,8 @@ class UsersController < ApiController
     before_action :set_user, only: [:show, :update]
 
     def show
-        render json: serialize(@user)
+        user = User.includes(:orders).find(params[:id])
+        render json: serialize(user)
     end
 
     # def update 
@@ -26,7 +27,7 @@ class UsersController < ApiController
     private 
   
     def user_params
-        params.require(:user).permit(:name, :email, :curPassword, :newPassword, :newPassword_confirmation, :liked_movies)
+        params.require(:user).permit(:name, :email, :curPassword, :newPassword, :newPassword_confirmation, :liked_movies, :orders)
     end 
   
     def set_user 
