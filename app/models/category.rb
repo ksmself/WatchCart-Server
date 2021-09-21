@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  paginates_per 4
+  paginates_per 8
 
   include ImageUrl
   validates :title, presence: true
