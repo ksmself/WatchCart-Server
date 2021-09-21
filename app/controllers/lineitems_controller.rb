@@ -42,27 +42,9 @@ class LineitemsController < ApiController
         end
     end
 
-    def show 
-        optionId = @lineitem[:option_id]
-        optionInfo = Option.find_by(:id => optionId)
-        option_name =  optionInfo[:name]
-        option_price = optionInfo[:price]
-        movieId = optionInfo[:movie_id]
-        movieInfo = Movie.find_by(:id => movieId)
-        movie_name = movieInfo[:title]
-        image_path = movieInfo[:image]
-
-        render json: {
-            id: @lineitem.id, 
-            option_id: @lineitem.option_id,
-            quantity: @lineitem.quantity,
-            order_id: @lineitem.order_id, 
-            status: @lineitem.status, 
-            option_name: option_name,
-            option_price: option_price, 
-            movie_title: movie_name, 
-            image_path: image_path, 
-        }
+    def show
+        lineitem = LineItem.includes(:option).find(params[:id])
+        render json: serialize(lineitem)
     end
 
     def update
@@ -78,7 +60,7 @@ class LineitemsController < ApiController
     private 
 
     def line_item_params
-        params.require(:line_item).permit(:option_id, :quantity, :order_id, :status, :id)
+        params.require(:line_item).permit(:option_id, :quantity, :order_id, :status, :id, :option)
     end
 
     def set_lineitem
