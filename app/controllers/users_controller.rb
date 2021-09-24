@@ -33,4 +33,8 @@ class UsersController < ApiController
     def set_user 
         @user = User.find(params[:id])
     end
+
+    def permitted_query
+        params[:q].permit(:status_eq)
+    end
 end

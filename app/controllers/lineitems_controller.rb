@@ -60,7 +60,7 @@ class LineitemsController < ApiController
     private 
 
     def line_item_params
-        params.require(:line_item).permit(:option_id, :quantity, :order_id, :status, :id, :option)
+        params.require(:line_item).permit(:option_id, :quantity, :order_id, :status, :id, :option, :order)
     end
 
     def set_lineitem
