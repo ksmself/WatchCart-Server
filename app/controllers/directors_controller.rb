@@ -1,5 +1,6 @@
 class DirectorsController < ApiController
     before_action :set_director, only: [:show, :update, :destroy]
+    before_action :set_query_param, only: [:show]
 
     def index
         directors = Director.all
@@ -12,7 +13,20 @@ class DirectorsController < ApiController
     end 
 
     def show
-        render json: serialize(@director)
+        if @queryParam.nil?
+            sortedMovies = @director.movies
+        else
+            if @queryParam[:s] === 'stars desc'
+                sortedMovies = @director.movies.sort{ |a, b| b.stars <=> a.stars } 
+            else 
+                sortedMovies = @director.movies.sort{ |a, b| a.stars <=> b.stars } 
+            end
+        end
+        render json: {
+            id: @director.id, 
+            name: @director.name,
+            movies: sortedMovies, 
+        }
     end
 
     def update
@@ -33,5 +47,9 @@ class DirectorsController < ApiController
 
     def set_director
         @director = Director.find(params[:id])
+    end
+
+    def set_query_param
+        @queryParam = request.query_parameters[:q]
     end
 end
