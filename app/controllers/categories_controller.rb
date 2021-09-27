@@ -13,7 +13,7 @@ class CategoriesController < ApiController
   end
 
   def show
-    if @queryParam.nil?
+    if @queryParam.blank?
       sortedMovies = @category.movies
     else 
       if @queryParam[:s] === 'stars desc'

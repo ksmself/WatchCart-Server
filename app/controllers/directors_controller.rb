@@ -13,7 +13,7 @@ class DirectorsController < ApiController
     end 
 
     def show
-        if @queryParam.nil?
+        if @queryParam.blank?
             sortedMovies = @director.movies
         else
             if @queryParam[:s] === 'stars desc'

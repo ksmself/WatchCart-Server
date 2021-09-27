@@ -10,13 +10,13 @@ class LineitemsController < ApiController
         params[:line_item].each do |item|
             # puts '내가 바로 item', item
             orderExist = Order.find_by(:user_id => current_api_user.id)
-            if orderExist.nil?
+            if orderExist.blank?
                 order = Order.create(:user_id => current_api_user.id)
                 orderId = order.id
                 # puts 'order가 아예 없었음: ', orderId
             else 
                 uncompletedExist = Order.find_by(:status => "orderUncompleted", :user_id => current_api_user.id)
-                if uncompletedExist.nil?
+                if uncompletedExist.blank?
                     order = Order.create(:user_id => current_api_user.id)
                     orderId = order.id
                     # puts 'uncompleted가 없었음: ', orderId
@@ -30,7 +30,7 @@ class LineitemsController < ApiController
             optionExist = LineItem.find_by(:order_id => orderId, option_id: item[:id])
             # puts '옵션 존재 여부', optionExist
             # 처음 장바구니에 담기는 option이라면 line_item 새로 생성 
-            if optionExist.nil?
+            if optionExist.blank?
                 line_item = LineItem.create(order_id: orderId, option_id: item[:id], quantity: item[:quantity])
                 # render json: serialize(line_item)
                 # puts '처음 장바구니에 담기는 option'
