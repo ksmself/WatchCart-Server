@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
   enum status: { orderUncompleted: 0, orderCompleted: 1, shipPreparing: 2, shipping: 3, shipCompleted: 4 }
   # 주문안함, 주문완료, 배송준비중, 배송중, 배송완료
+
+  default_scope { order('updated_at DESC') }
   
   belongs_to :user, optional: true 
   # order가 user를 필수로 상속하는 것은 아니기 때문

@@ -2,8 +2,7 @@ class UsersController < ApiController
     before_action :set_user, only: [:show, :update]
 
     def show
-        user = User.includes(:orders).find(params[:id])
-        render json: serialize(user)
+        render json: serialize(@user)
     end
 
     def update
@@ -21,7 +20,7 @@ class UsersController < ApiController
     end 
   
     def set_user 
-        @user = User.find(params[:id])
+        @user = User.includes(:orders).find(params[:id])
     end
 
     def permitted_query
