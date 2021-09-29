@@ -25,6 +25,23 @@ class MoviesController < ApiController
         render json: serialize(@movie)
     end
 
+    def search
+        total = []
+        movies = Movie.ransack(title_cont: params[:q]).result
+        actors = Movie.ransack(played_actors_name_cont: params[:q]).result
+        directors = Movie.ransack(director_name_cont: params[:q]).result
+        movies.each do |movie|
+            total << movie
+        end
+        actors.each do |actor|
+            total << actor
+        end
+        directors.each do |director|
+            total << director
+        end
+        render json: total
+    end
+
     private
 
     def movie_params
@@ -38,6 +55,6 @@ class MoviesController < ApiController
     # 아무거나 query를 던질 수 없게 permitted 설정
     # 현재는 title 검색과 sorting 정도만
     def permitted_query
-        params[:q].permit(:title_cont, :category_id_eq, :id_eq, :s)
+        params[:q].permit(:title_cont, :category_id_eq, :id_eq, :s, :played_actors_name_cont, :director_name_cont)
     end
 end
