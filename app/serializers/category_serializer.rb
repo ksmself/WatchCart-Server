@@ -1,7 +1,5 @@
 class CategorySerializer < Panko::Serializer
-  attributes :id, :title, :position, :image_path
+  attributes :id, :title
 
-  delegate :image_path, to: :object
-
-  has_many :movies, serializer: MovieSerializer
+  has_many :movies, only: [:id, :title, :image_path], serializer: MovieSerializer
 end
