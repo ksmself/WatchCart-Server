@@ -4,5 +4,5 @@ class MovieSerializer < Panko::Serializer
 
   has_many :options, serializer: OptionSerializer
   has_many :played_actors, serializer: ActorSerializer
-  has_one :director, only: [:name]
+  has_one :director, only: [:id, :name]
 end
