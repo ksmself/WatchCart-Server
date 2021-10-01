@@ -1,7 +1,5 @@
   class UserSerializer < Panko::Serializer
-    include ImagableSerializer
-
-    attributes :id, :email, :name, :description
+    attributes :id, :email, :name, :address1
     
     has_many :liked_movies, only: [:id, :title, :image_path], serializer: MovieSerializer
     has_many :good_movies, only: [:id, :title, :image_path], serializer: MovieSerializer
