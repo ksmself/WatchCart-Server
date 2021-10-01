@@ -3,7 +3,6 @@ class ActorsController < ApiController
     before_action :set_query_param, only: [:show]
 
     def index 
-        #actors = Actor.ransack(params[:q]).result
         actors = Actor.includes(:played_movies).all
         render json: each_serialize(actors)
     end

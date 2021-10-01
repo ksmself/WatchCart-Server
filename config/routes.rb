@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   get '/movies/search' => 'movies#search'
 
   resources :users
-  # resources :categories
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end

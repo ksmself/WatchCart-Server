@@ -15,7 +15,6 @@ class BadsController < ApiController
         bad = Bad.find_by(user_id: current_api_user.id, movie_id: params[:id])
 
         if bad.blank?
-            puts 'bad is blank'
             render json: false
         else 
             render json: true
