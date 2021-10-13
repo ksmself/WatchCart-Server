@@ -13,10 +13,10 @@ class ActorsController < ApiController
     end 
 
     def show
-        if @queryParam.blank?
+        if @query_param.blank?
             sortedMovies = @actor.played_movies
         else
-            if @queryParam[:s] === 'stars desc'
+            if @query_param[:s] === 'stars desc'
                 sortedMovies = @actor.played_movies.sort{ |a, b| b.stars <=> a.stars } 
             else
                 sortedMovies = @actor.played_movies.sort{ |a, b| a.stars <=> b.stars } 
@@ -40,7 +40,7 @@ class ActorsController < ApiController
     end
 
     def set_query_param
-        @queryParam = request.query_parameters[:q]
+        @query_param = request.query_parameters[:q]
     end
 
     def permitted_query
