@@ -2,7 +2,7 @@ class PlaysController < ApiController
     before_action :set_play, only: [:show]
 
     def index
-        plays = Play.ransack(params[:q]).result
+        plays = Play.all
         render json: each_serialize(plays)
     end
 

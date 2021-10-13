@@ -2,7 +2,7 @@ class LineitemsController < ApiController
     before_action :set_lineitem, only: [:show, :update, :destroy]
 
     def index
-        line_items = LineItem.all.ransack(params[:q]).result
+        line_items = LineItem.ransack(params[:q]).result
         render json: each_serialize(line_items)
     end 
 

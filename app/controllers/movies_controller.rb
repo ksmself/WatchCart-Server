@@ -2,7 +2,7 @@ class MoviesController < ApiController
     before_action :set_movie, only: [:show, :update, :destroy]
 
     def index
-        movies = Movie.ransack(params[:q]).result
+        movies = Movie.all
         render json: each_serialize(movies)
     end
 

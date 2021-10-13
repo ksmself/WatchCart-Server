@@ -2,7 +2,7 @@ class OrdersController < ApiController
 	before_action :set_order, only: [:show, :update, :destroy]
 
     def index 
-		orders = Order.all.ransack(params[:q]).result
+		orders = Order.all
 		render json: each_serialize(orders)
 	end
 
