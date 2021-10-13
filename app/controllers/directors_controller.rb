@@ -14,7 +14,7 @@ class DirectorsController < ApiController
 
     def show
         if @queryParam.blank?
-            sortedMovies = @director.movies
+            sortedMovies = @director.movies.select(:id, :title, :stars, :image)
         else
             if @queryParam[:s] === 'stars desc'
                 sortedMovies = @director.movies.sort{ |a, b| b.stars <=> a.stars } 

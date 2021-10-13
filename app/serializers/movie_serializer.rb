@@ -3,6 +3,6 @@ class MovieSerializer < Panko::Serializer
   delegate :image_path, to: :object
 
   has_many :options, serializer: OptionSerializer
-  has_many :played_actors, serializer: ActorSerializer
+  has_many :played_actors, serializer: ActorSerializer, only: [:id, :name]
   has_one :director, only: [:id, :name]
 end
