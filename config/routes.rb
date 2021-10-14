@@ -26,11 +26,13 @@ Rails.application.routes.draw do
   # as를 붙이면 get 방식이 아닌 post 방식을 바로 호출할 수 있다.
   post '/movies/:id/like', to: 'likes#like_toggle', as: 'like'
   get '/movies/:id/like' => 'likes#is_like'
-  post '/movies/:id/good', to: 'goods#good_toggle', as: 'good'
-  get '/movies/:id/good' => 'goods#is_good'
-  post '/movies/:id/bad', to: 'bads#bad_toggle', as: 'bad'
-  get '/movies/:id/bad' => 'bads#is_bad'
+  
   get '/movies/search' => 'movies#search'
+
+  post '/movies/:id/good', to: 'ratings#good_toggle', as: 'good'
+  get '/movies/:id/good' => 'ratings#is_good'
+  post '/movies/:id/bad', to: 'ratings#bad_toggle', as: 'bad'
+  get '/movies/:id/bad' => 'ratings#is_bad'
 
   resources :users
   concern :paginatable do
