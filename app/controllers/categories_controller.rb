@@ -17,9 +17,11 @@ class CategoriesController < ApiController
       sortedMovies = @category.movies.page(params[:page]).per(4)
     else 
       if @queryParam[:s] === 'stars desc'
-        sortedMovies = @category.movies.sort{ |a, b| b.stars <=> a.stars } 
+        descSort = @category.movies.order("stars DESC")
+        sortedMovies = descSort.page(params[:page]).per(4)
       else 
-        sortedMovies = @category.movies.sort{ |a, b| a.stars <=> b.stars } 
+        ascSort = @category.movies.order("stars ASC")
+        sortedMovies = ascSort.page(params[:page]).per(4)
       end
     end
     render json: {
