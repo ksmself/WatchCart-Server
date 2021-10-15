@@ -36,10 +36,11 @@ Rails.application.routes.draw do
 
   resources :users
   concern :paginatable do
-    get '(page/:page)', action: :index, on: :collection, as: ''
+    get '(page/:page)', action: :index, on: :collection, as: 'index'
+    get '(:id/page/:page)', action: :show, on: :collection, as: 'show'
   end
   
-  resources :categories, concerns: :paginatable
+  resources :categories , concerns: :paginatable
   resources :movies
   resources :orders
   resources :lineitems

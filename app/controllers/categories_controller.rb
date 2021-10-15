@@ -6,7 +6,7 @@ class CategoriesController < ApiController
     if request.path === '/categories'
       categories = Category.all
     else 
-      categories = Category.page(params[:page])
+      categories = Category.page(params[:page]).per(4)
     end
     
     render json: each_serialize(categories, serializer_name: :CategorySerializer)
@@ -14,7 +14,7 @@ class CategoriesController < ApiController
 
   def show
     if @queryParam.blank?
-      sortedMovies = @category.movies
+      sortedMovies = @category.movies.page(params[:page]).per(4)
     else 
       if @queryParam[:s] === 'stars desc'
         sortedMovies = @category.movies.sort{ |a, b| b.stars <=> a.stars } 
