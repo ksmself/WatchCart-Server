@@ -13,13 +13,15 @@ class DirectorsController < ApiController
     end 
 
     def show
-        if @queryParam.blank?
-            sortedMovies = @director.movies.select(:id, :title, :stars, :image)
+        if @query_param.blank?
+            sortedMovies = @director.movies.select(:id, :title, :stars, :image).page(params[:page]).per(4)
         else
-            if @queryParam[:s] === 'stars desc'
-                sortedMovies = @director.movies.sort{ |a, b| b.stars <=> a.stars } 
+            if @query_param[:s] === 'stars desc'
+                descSort = @director.movies.select(:id, :title, :stars, :image).order("stars DESC")
+                sortedMovies = descSort.page(params[:page]).per(4)
             else 
-                sortedMovies = @director.movies.sort{ |a, b| a.stars <=> b.stars } 
+                ascSort = @director.movies.select(:id, :title, :stars, :image).order("stars ASC")
+                sortedMovies = ascSort.page(params[:page]).per(4)
             end
         end
         render json: {
@@ -50,6 +52,6 @@ class DirectorsController < ApiController
     end
 
     def set_query_param
-        @queryParam = request.query_parameters[:q]
+        @query_param = request.query_parameters[:q]
     end
 end

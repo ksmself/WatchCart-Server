@@ -14,12 +14,14 @@ class ActorsController < ApiController
 
     def show
         if @query_param.blank?
-            sortedMovies = @actor.played_movies.select(:id, :title, :stars, :image)
+            sortedMovies = @actor.played_movies.select(:id, :title, :stars, :image).page(params[:page]).per(4)
         else
             if @query_param[:s] === 'stars desc'
-                sortedMovies = @actor.played_movies.sort{ |a, b| b.stars <=> a.stars } 
-            else
-                sortedMovies = @actor.played_movies.sort{ |a, b| a.stars <=> b.stars } 
+                descSort = @actor.played_movies.select(:id, :title, :stars, :image).order("stars DESC")
+                sortedMovies = descSort.page(params[:page]).per(4)
+            else 
+                ascSort = @actor.played_movies.select(:id, :title, :stars, :image).order("stars ASC")
+                sortedMovies = ascSort.page(params[:page]).per(4)
             end
         end
         render json: {

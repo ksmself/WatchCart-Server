@@ -13,10 +13,10 @@ class CategoriesController < ApiController
   end
 
   def show
-    if @queryParam.blank?
+    if @query_param.blank?
       sortedMovies = @category.movies.page(params[:page]).per(4)
     else 
-      if @queryParam[:s] === 'stars desc'
+      if @query_param[:s] === 'stars desc'
         descSort = @category.movies.order("stars DESC")
         sortedMovies = descSort.page(params[:page]).per(4)
       else 
@@ -38,7 +38,7 @@ class CategoriesController < ApiController
   end
 
   def set_query_param
-    @queryParam = request.query_parameters[:q]
+    @query_param = request.query_parameters[:q]
   end
 
   def permitted_query

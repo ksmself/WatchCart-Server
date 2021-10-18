@@ -44,8 +44,8 @@ Rails.application.routes.draw do
   resources :movies
   resources :orders
   resources :lineitems
-  resources :directors
-  resources :actors
+  resources :directors, concerns: :paginatable
+  resources :actors, concerns: :paginatable
   resources :plays
   resources :items
   resources :images do
