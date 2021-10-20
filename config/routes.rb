@@ -34,12 +34,17 @@ Rails.application.routes.draw do
   post '/movies/:id/bad', to: 'ratings#bad_toggle', as: 'bad'
   get '/movies/:id/bad' => 'ratings#is_bad'
 
-  resources :users
+  get '/users/:id/orders/page/:page' => 'users#show_order_list'
+  get '/users/:id/liked_movies/page/:page' => 'users#show_liked_movies'
+  get '/users/:id/rated_good/page/:page' => 'users#show_rated_good'
+  get '/users/:id/rated_bad/page/:page' => 'users#show_rated_bad'
+
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: 'index'
     get '(:id/page/:page)', action: :show, on: :collection, as: 'show'
   end
   
+  resources :users 
   resources :categories , concerns: :paginatable
   resources :movies
   resources :orders
