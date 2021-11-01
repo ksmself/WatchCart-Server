@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   get '/users/:id/rated_good/page/:page' => 'users#show_rated_good'
   get '/users/:id/rated_bad/page/:page' => 'users#show_rated_bad'
 
+  post '/lineitems/quick' => 'lineitems#create_quick_line_item'
+
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: 'index'
     get '(:id/page/:page)', action: :show, on: :collection, as: 'show'

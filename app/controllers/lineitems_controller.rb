@@ -8,30 +8,25 @@ class LineitemsController < ApiController
 
     def create
         params[:line_item].each do |item|
-            orderExist = Order.find_by(:user_id => current_api_user.id)
-            if orderExist.blank?
-                order = Order.create(:user_id => current_api_user.id)
-                orderId = order.id
-            else 
-                uncompletedExist = Order.find_by(:status => "orderUncompleted", :user_id => current_api_user.id)
-                if uncompletedExist.blank?
-                    order = Order.create(:user_id => current_api_user.id)
-                    orderId = order.id
-                else 
-                    orderId = uncompletedExist.id
-                end
-            end 
-
-            # 위에서 orderId가 정해졌으니 이미 있는 option인지 확인 필요
-            optionExist = LineItem.find_by(:order_id => orderId, option_id: item[:id])
-            # 처음 장바구니에 담기는 option이라면 line_item 새로 생성 
-            if optionExist.blank?
-                line_item = LineItem.create(order_id: orderId, option_id: item[:id], quantity: item[:quantity])
-            # 이미 있는 option_id만 수량만 변경
-            else 
-                optionExist.update(quantity: optionExist.quantity + item[:quantity])
+            order = current_api_user.orders.find_or_create_by(status: 'orderUncompleted')
+            order_option = order.line_items.find_by_option_id(item[:id])
+            if order_option
+                order_option.update(quantity: order_option.quantity + item[:quantity])
+            else
+                order.line_items.create(option_id: item[:id], quantity: item[:quantity])
             end
         end
+    end
+
+    def create_quick_line_item
+        quick_line_items = []
+        params[:line_item].each do |item|
+            order = current_api_user.orders.find_or_create_by(status: 'orderUncompleted')
+            quick_line_item = order.line_items.create(option_id: item[:id], quantity: item[:quantity])
+            quick_line_item = LineItem.includes(:option).find_by(id: quick_line_item.id)
+            quick_line_items.push(serialize(quick_line_item))
+        end
+        render json: quick_line_items
     end
 
     def show
@@ -51,6 +46,7 @@ class LineitemsController < ApiController
 
     private 
 
+    # 이상한 pararmeter가 날라올 수도 있으니 permit하는 것
     def line_item_params
         params.require(:line_item).permit(:option_id, :quantity, :order_id, :status, :id, :option, :order)
     end
